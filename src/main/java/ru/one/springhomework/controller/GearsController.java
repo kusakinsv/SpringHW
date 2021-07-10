@@ -56,10 +56,10 @@ public class GearsController {
         }
     @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity deleteSteeringWheel(@RequestBody Gear gear, @PathVariable(name = "id", required = false) Long id) {
+    public ResponseEntity deleteGear(@RequestBody Gear gear, @PathVariable(name = "id", required = false) Long id) {
         serviceForGears.deleteGear(id);
         return ResponseEntity.ok((new HashMap<String, String>() {{
-            put("system", "SW id " + id + " DELETED");
+            put("system", "Gear id " + id + " DELETED");
         }}));
     }
 

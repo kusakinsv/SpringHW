@@ -1,13 +1,17 @@
 package ru.one.springhomework.entities;
-
-
-import lombok.Data;
-
-
 import javax.persistence.*;
 
+
+/*
+{
+	"mnfName": "Tesla",
+	"modelName": "Model S",
+	"engine": {
+	                "type": "electrical engine"
+}}
+*/
+
 @Entity
-@Data
 public class Car {
 
     @Id

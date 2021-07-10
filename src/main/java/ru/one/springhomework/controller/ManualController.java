@@ -2,18 +2,23 @@ package ru.one.springhomework.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import ru.one.springhomework.entities.Engine;
+import org.springframework.web.bind.annotation.*;
 import ru.one.springhomework.entities.Manual;
-import ru.one.springhomework.entities.SteeringWheel;
-import ru.one.springhomework.services.ServiceForEngine;
 import ru.one.springhomework.services.ServiceForManual;
 
-import java.util.HashMap;
+/*            {"type": "Cylinder head manual for petrol",
+            "engines":[
+            {"type": "V8 petrol engine"},
+            {"type": "V12 petrol engine"},
+						{"type": "R4 petrol engine"}
+            ]}
+ */
 
+
+import java.util.HashMap;
+@RestController
+@RequestMapping(value = "/api/manual", consumes = {MediaType.ALL_VALUE},
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public class ManualController {
     ServiceForManual serviceForManual;
 
@@ -43,7 +48,7 @@ public class ManualController {
     public ResponseEntity updateManual(@RequestBody Manual manual, @PathVariable(name = "id", required = false) Long id) {
         serviceForManual.updateManual(id, manual.getType());
         return ResponseEntity.ok((new HashMap<String, String>() {{
-            put("system", "SW id "  + id + " UPDATED TO " + manual.getType());
+            put("system", "Manual id "  + id + " UPDATED TO " + manual.getType());
         }}));
     }
     @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},

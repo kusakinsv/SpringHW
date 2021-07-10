@@ -17,8 +17,8 @@ public class ServiceForEngineImpl implements ServiceForEngine {
         }
 
         @Override
-        public void addEngine(Engine steeringWheel) {
-            engineRepository.save(steeringWheel);
+        public void addEngine(Engine engine) {
+            engineRepository.save(engine);
         }
 
         @Override

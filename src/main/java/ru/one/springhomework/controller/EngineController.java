@@ -2,12 +2,8 @@ package ru.one.springhomework.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import ru.one.springhomework.entities.Engine;
-import ru.one.springhomework.entities.SteeringWheel;
 import ru.one.springhomework.services.ServiceForEngine;
 import java.util.HashMap;
 
@@ -20,7 +16,9 @@ import java.util.HashMap;
             {"size": 15}
             ]}
  */
-
+@RestController
+@RequestMapping(value = "/api/engine", consumes = {MediaType.ALL_VALUE},
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public class EngineController {
     ServiceForEngine serviceForEngine;
 
@@ -47,15 +45,15 @@ public class EngineController {
 
     @PostMapping(value ={"update","update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity updateEngine(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) {
-        serviceForEngine.updateEngine(id, steeringWheel.getType());
+    public ResponseEntity updateEngine(@RequestBody Engine engine, @PathVariable(name = "id", required = false) Long id) {
+        serviceForEngine.updateEngine(id, engine.getType());
         return ResponseEntity.ok((new HashMap<String, String>() {{
-            put("system", "SW id "  + id + " UPDATED TO " + steeringWheel.getType());
+            put("system", "Engine id "  + id + " UPDATED TO " + engine.getType());
         }}));
     }
     @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity deleteEngine(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) {
+    public ResponseEntity deleteEngine(@RequestBody Engine engine, @PathVariable(name = "id", required = false) Long id) {
         serviceForEngine.deleteEngine(id);
         return ResponseEntity.ok((new HashMap<String, String>() {{
             put("system", "SW id " + id + " DELETED");
