@@ -1,31 +1,35 @@
-package ru.one.springhomework.models;
+package ru.one.springhomework.entities;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
+
+
 @Entity
 public class SteeringWheel {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+@Id
+@GeneratedValue
+    private Long Id;
 
     private String type;
+
+    public SteeringWheel(Long id, String type) {
+        Id = id;
+        this.type = type;
+    }
 
     public SteeringWheel() {
     }
 
-    public SteeringWheel(Long id, String type) {
-        this.id = id;
-        this.type = type;
-    }
-
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        Id = id;
     }
 
     public String getType() {

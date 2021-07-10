@@ -1,4 +1,9 @@
-package ru.one.springhomework.models;
+package ru.one.springhomework.entities;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,11 +14,19 @@ public class Engine {
     @GeneratedValue
     private Long id;
     private String type;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "engine")
-    private List<Gear> gears;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Manual> manuals;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ENGINE_ID", referencedColumnName = "ID")
+    private List<Gear> gears;
+
+    public Engine() {
+    }
+
+    public Engine(Long id, String type, List<Gear> gears) {
+        this.id = id;
+        this.type = type;
+        this.gears = gears;
+    }
 
     public Long getId() {
         return id;
@@ -39,21 +52,8 @@ public class Engine {
         this.gears = gears;
     }
 
-    public List<Manual> getManuals() {
-        return manuals;
-    }
-
-    public void setManuals(List<Manual> manuals) {
-        this.manuals = manuals;
-    }
-
-    public Engine() {
-    }
-
-    public Engine(Long id, String type, List<Gear> gears, List<Manual> manuals) {
-        this.id = id;
-        this.type = type;
-        this.gears = gears;
-        this.manuals = manuals;
+    @Override
+    public String toString(){
+        return "";
     }
 }
