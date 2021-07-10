@@ -9,10 +9,9 @@ import java.util.List;
 
 public interface ServiceForGears {
 void addGear(Gear gear);
-Gear findGearByEngineId(Long engineId);
 Gear findGearById(Long engineId);
-List<Gear> findAllById(Long id);
 List<Gear> findAll();
+void deleteGear(Long id);
 Gear updateGear(Long id, int size);
 
 

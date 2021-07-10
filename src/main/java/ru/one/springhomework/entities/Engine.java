@@ -13,10 +13,10 @@ public class Engine {
     @Id
     @GeneratedValue
     private Long id;
+
     private String type;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ENGINE_ID", referencedColumnName = "ID")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "engine")
     private List<Gear> gears;
 
     public Engine() {
@@ -26,6 +26,11 @@ public class Engine {
         this.id = id;
         this.type = type;
         this.gears = gears;
+    }
+
+    public Engine(Long id, String type) {
+        this.id = id;
+        this.type = type;
     }
 
     public Long getId() {

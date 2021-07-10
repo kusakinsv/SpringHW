@@ -51,7 +51,7 @@ public class SWController {
         public ResponseEntity updateSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) {
             serviceForSW.updateSW(id, steeringWheel.getType());
         return ResponseEntity.ok((new HashMap<String, String>() {{
-            put("system", "SW id "  + id + " updated to " + steeringWheel.getType());
+            put("system", "SW id "  + id + " UPDATED TO " + steeringWheel.getType());
         }}));
     }
     @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},

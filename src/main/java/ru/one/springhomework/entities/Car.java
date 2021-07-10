@@ -1,8 +1,8 @@
 package ru.one.springhomework.entities;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 import javax.persistence.*;
 
@@ -22,7 +22,7 @@ public class Car {
     private String modelName;
 
     @OneToOne(cascade = CascadeType.ALL)
-    Engine engine;
+    private Engine engine;
 
     public Car() {
     }
@@ -36,6 +36,39 @@ public class Car {
 
     @Override
     public String toString(){
-        return mnfName + "" + modelName;
+        return mnfName + " " + modelName;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getMnfName() {
+        return mnfName;
+    }
+
+    public void setMnfName(String mnfName) {
+        this.mnfName = mnfName;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
 }

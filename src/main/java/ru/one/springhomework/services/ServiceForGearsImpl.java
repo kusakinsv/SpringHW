@@ -25,8 +25,9 @@ public class ServiceForGearsImpl implements ServiceForGears{
     }
     @Override
     public List<Gear> findAll(){
-        List<Gear> allgears = (List<Gear>) gearsRepository.findAll();
-        return allgears;
+        List<Gear> allGears = new ArrayList<>();
+        gearsRepository.findAll().forEach(x -> allGears.add(x));
+        return allGears;
     }
 
     @Override
@@ -36,10 +37,10 @@ public class ServiceForGearsImpl implements ServiceForGears{
         gearsRepository.save(gear);
         return gear;
     }
-
     @Override
-    public Gear findGearByEngineId(Long engineId) {
-        return null;
+    public void deleteGear(Long id) {
+        Gear gear = gearsRepository.findById(id).get();
+        gearsRepository.delete(gear);
     }
 
     @Override
@@ -47,9 +48,5 @@ public class ServiceForGearsImpl implements ServiceForGears{
         return gearsRepository.findById(engineId).get();
     }
 
-    @Override
-    public List<Gear> findAllById(Long id) {
-        return null;
-    }
 
 }

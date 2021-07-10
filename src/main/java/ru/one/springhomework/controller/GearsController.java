@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.one.springhomework.entities.Gear;
+import ru.one.springhomework.entities.SteeringWheel;
 import ru.one.springhomework.repos.GearsRepository;
 import ru.one.springhomework.services.ServiceForGears;
 import ru.one.springhomework.services.ServiceForGearsImpl;
@@ -50,10 +51,17 @@ public class GearsController {
         public ResponseEntity updateSteeringWheel(@RequestBody Gear gear, @PathVariable(name = "id", required = false) Long id) {
             serviceForGears.updateGear(id, gear.getSize());
             return ResponseEntity.ok((new HashMap<String, String>() {{
-                put("system", "SW id "  + id + " updated to " + gear.getSize());
+                put("system", "SW id "  + id + " UPDATED TO SIZE " + gear.getSize());
             }}));
         }
-
+    @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity deleteSteeringWheel(@RequestBody Gear gear, @PathVariable(name = "id", required = false) Long id) {
+        serviceForGears.deleteGear(id);
+        return ResponseEntity.ok((new HashMap<String, String>() {{
+            put("system", "SW id " + id + " DELETED");
+        }}));
+    }
 
 
     }

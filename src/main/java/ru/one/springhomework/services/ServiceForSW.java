@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ServiceForSW {
     void addSW(SteeringWheel steeringWheel);
-    void deleteSW(Long id);
     SteeringWheel findSWById(Long id);
     List<SteeringWheel> findAll();
+    void deleteSW(Long id);
     SteeringWheel updateSW(Long id, String type);
 }

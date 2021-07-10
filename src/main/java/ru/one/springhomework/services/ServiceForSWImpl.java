@@ -6,11 +6,12 @@ import ru.one.springhomework.entities.Gear;
 import ru.one.springhomework.entities.SteeringWheel;
 import ru.one.springhomework.repos.SWRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class ServiceForSWImpl implements ServiceForSW {
     SWRepository swRepository;
-
+    @Autowired
     public ServiceForSWImpl(SWRepository swRepository) {
         this.swRepository = swRepository;
     }
@@ -27,7 +28,8 @@ public class ServiceForSWImpl implements ServiceForSW {
 
     @Override
     public List<SteeringWheel> findAll(){
-        List<SteeringWheel> allSW = (List<SteeringWheel>) swRepository.findAll();
+        List<SteeringWheel> allSW = new ArrayList<>();
+        swRepository.findAll().forEach(x -> allSW.add(x));
         return allSW;
     }
 
@@ -44,10 +46,4 @@ public class ServiceForSWImpl implements ServiceForSW {
         SteeringWheel steeringWheel = swRepository.findById(id).get();
         swRepository.delete(steeringWheel);
     }
-
-
-
-
-
-
 }
