@@ -30,9 +30,9 @@ public class CarController {
 
     @GetMapping(value ={"read","read/{id}"})
     public ResponseEntity readEngine(@PathVariable(name = "id", required = false) Long id) {
-        if (id != null) {
+        if (id != null){
             return ResponseEntity.ok(serviceForCar.findCarById(id));
-        } else {
+            } else {
             return ResponseEntity.ok(serviceForCar.findAll());
         }
     }
@@ -41,8 +41,6 @@ public class CarController {
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity updateEngine(@RequestBody Car car, @PathVariable(name = "id", required = false) Long id) throws Exception {
         if (id == null) throw new Exception("Error: empty id");
-       // serviceForCar.updateCar(id, serviceForCar.getType());
-        //String manufacturer, modelname, enginetype;
         serviceForCar.updateCar(id, car.getMnfName(), car.getMnfName(), car.getEngine());
         return ResponseEntity.ok((new HashMap<String, String>() {{
             put("system", "Car "  + id + " UPDATED TO " + car.getMnfName() + " " + car.getModelName());
@@ -54,7 +52,7 @@ public class CarController {
         if (id == null) throw new Exception("Error: empty id");
         serviceForCar.deleteCar(id);
         return ResponseEntity.ok((new HashMap<String, String>() {{
-            put("system", "SW id " + id + " DELETED");
+            put("system", "Car id " + id + " DELETED");
         }}));
     }
 

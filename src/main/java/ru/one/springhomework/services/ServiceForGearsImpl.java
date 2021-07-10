@@ -2,7 +2,6 @@ package ru.one.springhomework.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.one.springhomework.entities.Car;
 import ru.one.springhomework.entities.Gear;
 import ru.one.springhomework.entities.SteeringWheel;
 import ru.one.springhomework.repos.GearsRepository;

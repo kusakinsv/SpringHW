@@ -37,7 +37,7 @@ public class EngineController {
     public ResponseEntity readEngine(@PathVariable(name = "id", required = false) Long id) {
         if (id != null) {
             return ResponseEntity.ok(serviceForEngine.findEngineById(id));
-        } else {
+            } else {
             return ResponseEntity.ok(serviceForEngine.findAll());
         }
     }
@@ -57,7 +57,7 @@ public class EngineController {
         if (id == null) throw new Exception("Error: empty id");
         serviceForEngine.deleteEngine(id);
         return ResponseEntity.ok((new HashMap<String, String>() {{
-            put("system", "SW id " + id + " DELETED");
+            put("system", "Engine id " + id + " DELETED");
         }}));
     }
 

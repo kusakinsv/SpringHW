@@ -20,10 +20,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/gear", consumes = {MediaType.ALL_VALUE},
-                                    produces = MediaType.APPLICATION_JSON_VALUE)
+        produces = MediaType.APPLICATION_JSON_VALUE)
 
 public class GearsController {
-   // GearsRepository gearsRepository;
+    // GearsRepository gearsRepository;
     ServiceForGears serviceForGears;
 
     @Autowired
@@ -38,24 +38,26 @@ public class GearsController {
         return ResponseEntity.ok(gear);
     }
 
-    @GetMapping(value ={"read","read/{id}"})
+    @GetMapping(value = {"read", "read/{id}"})
     public ResponseEntity readGear(@PathVariable(name = "id", required = false) Long id) {
         if (id != null) {
             return ResponseEntity.ok(serviceForGears.findGearById(id));
         } else {
             return ResponseEntity.ok(serviceForGears.findAll());
-        }}
-
-        @PostMapping(value ={"update","update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
-                produces = {MediaType.APPLICATION_JSON_VALUE})
-        public ResponseEntity updateSteeringWheel(@RequestBody Gear gear, @PathVariable(name = "id", required = false) Long id) throws Exception {
-            if (id == null) throw new Exception("Error: empty id");
-            serviceForGears.updateGear(id, gear.getSize());
-            return ResponseEntity.ok((new HashMap<String, String>() {{
-                put("system", "SW id "  + id + " UPDATED TO SIZE " + gear.getSize());
-            }}));
         }
-    @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
+    }
+
+    @PostMapping(value = {"update", "update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity updateSteeringWheel(@RequestBody Gear gear, @PathVariable(name = "id", required = false) Long id) throws Exception {
+        if (id == null) throw new Exception("Error: empty id");
+        serviceForGears.updateGear(id, gear.getSize());
+        return ResponseEntity.ok((new HashMap<String, String>() {{
+            put("system", "SW id " + id + " UPDATED TO SIZE " + gear.getSize());
+        }}));
+    }
+
+    @PostMapping(value = {"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity deleteGear(@RequestBody Gear gear, @PathVariable(name = "id", required = false) Long id) throws Exception {
         if (id == null) throw new Exception("Error: empty id");
@@ -66,7 +68,7 @@ public class GearsController {
     }
 
 
-    }
+}
 
 
 

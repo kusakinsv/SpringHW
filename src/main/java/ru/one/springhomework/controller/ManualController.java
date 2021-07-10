@@ -16,13 +16,14 @@ import ru.one.springhomework.services.ServiceForManual;
 
 
 import java.util.HashMap;
+
 @RestController
 @RequestMapping(value = "/api/manual", consumes = {MediaType.ALL_VALUE},
         produces = MediaType.APPLICATION_JSON_VALUE)
 public class ManualController {
     ServiceForManual serviceForManual;
 
-    ManualController(ServiceForManual serviceForManual){
+    ManualController(ServiceForManual serviceForManual) {
         this.serviceForManual = serviceForManual;
     }
 
@@ -34,7 +35,7 @@ public class ManualController {
         return ResponseEntity.ok(manual);
     }
 
-    @GetMapping(value ={"read","read/{id}"})
+    @GetMapping(value = {"read", "read/{id}"})
     public ResponseEntity readManual(@PathVariable(name = "id", required = false) Long id) {
         if (id != null) {
             return ResponseEntity.ok(serviceForManual.findManualById(id));
@@ -43,22 +44,23 @@ public class ManualController {
         }
     }
 
-    @PostMapping(value ={"update","update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
+    @PostMapping(value = {"update", "update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity updateManual(@RequestBody Manual manual, @PathVariable(name = "id", required = false) Long id) throws Exception {
         if (id == null) throw new Exception("Error: empty id");
         serviceForManual.updateManual(id, manual.getType());
         return ResponseEntity.ok((new HashMap<String, String>() {{
-            put("system", "Manual id "  + id + " UPDATED TO " + manual.getType());
+            put("system", "Manual id " + id + " UPDATED TO " + manual.getType());
         }}));
     }
-    @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
+
+    @PostMapping(value = {"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity deleteManual(@RequestBody Manual manual, @PathVariable(name = "id", required = false) Long id) throws Exception {
         if (id == null) throw new Exception("Error: empty id");
         serviceForManual.deleteManual(id);
         return ResponseEntity.ok((new HashMap<String, String>() {{
-            put("system", "SW id " + id + " DELETED");
+            put("system", "Manual id " + id + " DELETED");
         }}));
     }
 }
