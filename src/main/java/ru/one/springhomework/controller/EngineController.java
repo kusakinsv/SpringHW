@@ -1,5 +1,4 @@
 package ru.one.springhomework.controller;
-
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +44,8 @@ public class EngineController {
 
     @PostMapping(value ={"update","update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity updateEngine(@RequestBody Engine engine, @PathVariable(name = "id", required = false) Long id) {
+    public ResponseEntity updateEngine(@RequestBody Engine engine, @PathVariable(name = "id", required = false) Long id) throws Exception {
+        if (id == null) throw new Exception("Error: empty id");
         serviceForEngine.updateEngine(id, engine.getType());
         return ResponseEntity.ok((new HashMap<String, String>() {{
             put("system", "Engine id "  + id + " UPDATED TO " + engine.getType());
@@ -53,7 +53,8 @@ public class EngineController {
     }
     @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity deleteEngine(@RequestBody Engine engine, @PathVariable(name = "id", required = false) Long id) {
+    public ResponseEntity deleteEngine(@RequestBody Engine engine, @PathVariable(name = "id", required = false) Long id) throws Exception {
+        if (id == null) throw new Exception("Error: empty id");
         serviceForEngine.deleteEngine(id);
         return ResponseEntity.ok((new HashMap<String, String>() {{
             put("system", "SW id " + id + " DELETED");

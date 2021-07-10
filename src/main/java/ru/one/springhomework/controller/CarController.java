@@ -39,9 +39,10 @@ public class CarController {
 
     @PostMapping(value ={"update","update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity updateEngine(@RequestBody Car car, @PathVariable(name = "id", required = false) Long id) {
+    public ResponseEntity updateEngine(@RequestBody Car car, @PathVariable(name = "id", required = false) Long id) throws Exception {
+        if (id == null) throw new Exception("Error: empty id");
        // serviceForCar.updateCar(id, serviceForCar.getType());
-        String manufacturer, modelname, enginetype;
+        //String manufacturer, modelname, enginetype;
         serviceForCar.updateCar(id, car.getMnfName(), car.getMnfName(), car.getEngine());
         return ResponseEntity.ok((new HashMap<String, String>() {{
             put("system", "Car "  + id + " UPDATED TO " + car.getMnfName() + " " + car.getModelName());
@@ -49,7 +50,8 @@ public class CarController {
     }
     @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity deleteCar(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) {
+    public ResponseEntity deleteCar(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) throws Exception {
+        if (id == null) throw new Exception("Error: empty id");
         serviceForCar.deleteCar(id);
         return ResponseEntity.ok((new HashMap<String, String>() {{
             put("system", "SW id " + id + " DELETED");

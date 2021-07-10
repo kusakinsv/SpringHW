@@ -48,7 +48,8 @@ public class SWController {
 
            @PostMapping(value ={"update","update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
                 produces = {MediaType.APPLICATION_JSON_VALUE})
-        public ResponseEntity updateSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) {
+        public ResponseEntity updateSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) throws Exception {
+        if (id == null) throw new Exception("Error: empty id");
             serviceForSW.updateSW(id, steeringWheel.getType());
         return ResponseEntity.ok((new HashMap<String, String>() {{
             put("system", "SW id "  + id + " UPDATED TO " + steeringWheel.getType());
@@ -56,7 +57,8 @@ public class SWController {
     }
     @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity deleteSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) {
+    public ResponseEntity deleteSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) throws Exception {
+        if (id == null) throw new Exception("Error: empty id");
         serviceForSW.deleteSW(id);
         return ResponseEntity.ok((new HashMap<String, String>() {{
             put("system", "SW id " + id + " DELETED");
