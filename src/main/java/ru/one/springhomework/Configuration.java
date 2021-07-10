@@ -2,6 +2,7 @@ package ru.one.springhomework;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -27,10 +28,10 @@ public class Configuration {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUsername("administrator");
-        dataSource.setPassword("123450000");
-        dataSource.setUrl("jdbc:postgresql://springdatabase2.cjgtmemkygoe.us-east-2.rds.amazonaws.com/springdatabase2");
+        dataSource.setDriverClassName(driver);
+        dataSource.setUsername(userName);
+        dataSource.setPassword(password);
+        dataSource.setUrl(url);
         return dataSource;
     }
 
@@ -54,7 +55,17 @@ public class Configuration {
     }
 
 
+    @Value("${spring.datasource.username}")
+    private String userName;
 
+    @Value("${spring.datasource.password}")
+    private String password;
+
+    @Value("${spring.datasource.url}")
+    private String url;
+
+    @Value("${spring.datasource.driver}")
+    private String driver;
 
     }
 
