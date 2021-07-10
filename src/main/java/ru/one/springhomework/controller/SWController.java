@@ -45,26 +45,21 @@ public class SWController {
             return ResponseEntity.ok(serviceForSW.findAll());
         }
     }
-//    @GetMapping(value ={"read","read/{id}"})
-//    public ResponseEntity readGear(@PathVariable(name = "id", required = false) Long id) {
-//        if (id != null) {
-//            return ResponseEntity.ok(serviceForSW.findSWById(id));
-//        } else {
-//            return ResponseEntity.ok(serviceForSW.findAll());
-//        }}
 
-
-        @PostMapping(value ={"update","update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
+           @PostMapping(value ={"update","update/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
                 produces = {MediaType.APPLICATION_JSON_VALUE})
         public ResponseEntity updateSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) {
-        return ResponseEntity.ok(serviceForSW.updateSW(id, steeringWheel.getType()));
+            serviceForSW.updateSW(id, steeringWheel.getType());
+        return ResponseEntity.ok((new HashMap<String, String>() {{
+            put("system", "SW id "  + id + " updated to " + steeringWheel.getType());
+        }}));
     }
     @PostMapping(value ={"delete", "delete/{id}"}, consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity deleteSteeringWheel(@RequestBody SteeringWheel steeringWheel, @PathVariable(name = "id", required = false) Long id) {
         serviceForSW.deleteSW(id);
         return ResponseEntity.ok((new HashMap<String, String>() {{
-            put("system", "SW id " + id + " deleted");
+            put("system", "SW id " + id + " DELETED");
         }}));
     }
 

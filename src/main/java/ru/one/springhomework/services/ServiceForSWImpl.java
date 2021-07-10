@@ -24,15 +24,12 @@ public class ServiceForSWImpl implements ServiceForSW {
     public SteeringWheel findSWById(Long id) {
         return swRepository.findById(id).get();
     }
+
     @Override
     public List<SteeringWheel> findAll(){
         List<SteeringWheel> allSW = (List<SteeringWheel>) swRepository.findAll();
         return allSW;
     }
-
-//    public void updateSW(SteeringWheel steeringWheel, Long id){
-//        steeringWheel.setType();
-//    }
 
     @Override
     public SteeringWheel updateSW(Long id, String type) {

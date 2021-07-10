@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.one.springhomework.entities.Car;
 import ru.one.springhomework.entities.Gear;
+import ru.one.springhomework.entities.SteeringWheel;
 import ru.one.springhomework.repos.GearsRepository;
 
 import java.util.ArrayList;
@@ -26,6 +27,14 @@ public class ServiceForGearsImpl implements ServiceForGears{
     public List<Gear> findAll(){
         List<Gear> allgears = (List<Gear>) gearsRepository.findAll();
         return allgears;
+    }
+
+    @Override
+    public Gear updateGear(Long id, int size) {
+        Gear gear = gearsRepository.findById(id).get();
+        gear.setSize(size);
+        gearsRepository.save(gear);
+        return gear;
     }
 
     @Override
