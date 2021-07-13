@@ -2,7 +2,7 @@
 
 Приложение выполняет CRUD операции над представленными сущностями, используя Spring Data JPA.
 Запросы принимаются в формате POST/GET запросов create, read, update, delete.
-(Например http://localhost:8080/api/gear/create)/
+(Например http://localhost:8080/api/gear/create)
 Передача информации осуществляется в формате JSON
 
 пример: POST запрос: http://localhost:8080/api/engine/create/
